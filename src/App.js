@@ -908,13 +908,13 @@ export default function VeralliaStore() {
 
                 <div className="p-8">
                   {/* Product Image */}
-                  <div className="bg-gradient-to-br from-emerald-50 to-stone-50 rounded-2xl p-8 mb-6 text-center group-hover:scale-105 transition-transform border border-emerald-100">
+                  <div className="bg-gradient-to-br from-emerald-50 to-stone-50 rounded-2xl mb-6 text-center group-hover:scale-105 transition-transform border border-emerald-100 overflow-hidden">
                     <img 
                       src={product.image} 
                       alt={product.name}
-                      className="w-full h-48 object-contain mb-4"
+                      className="w-full h-64 object-cover"
                     />
-                    <div className="inline-block bg-gradient-to-r from-emerald-800 to-green-900 text-white px-3 py-1 rounded-full text-xs font-bold">
+                    <div className="inline-block bg-gradient-to-r from-emerald-800 to-green-900 text-white px-3 py-1 rounded-full text-xs font-bold -mt-4 relative">
                       {product.badge}
                     </div>
                   </div>
