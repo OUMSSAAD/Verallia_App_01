@@ -822,7 +822,7 @@ export default function VeralliaStore() {
                 </div>
                 <h3 className="text-2xl font-bold text-center mb-4 text-amber-400">Offre Spéciale</h3>
                 <div className="text-center mb-6">
-                  <div className="text-5xl font-bold">149 DH</div>
+                  <div className="text-5xl font-bold">89.99 DH</div>
                   <div className="text-emerald-200 line-through text-xl">189 DH</div>
                   <div className="inline-block bg-amber-500 text-emerald-900 px-4 py-1 rounded-full font-bold text-sm mt-2">
                     -21% AUJOURD'HUI
