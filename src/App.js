@@ -27,7 +27,7 @@ export default function VeralliaStore() {
       subtitle: 'Formule Signature',
       price: 149,
       oldPrice: 189,
-      image: '🧴',
+      image: '/shampoing-hydratant.jpg',
       badge: 'BEST SELLER',
       rating: 4.9,
       reviews: 2847,
@@ -42,7 +42,7 @@ export default function VeralliaStore() {
       subtitle: 'Pack Duo Soin Complet',
       price: 269,
       oldPrice: 349,
-      image: '🧴🧴',
+      image: '/pack-duo.jpg',
       badge: 'PACK DUO',
       rating: 4.9,
       reviews: 1923,
@@ -57,7 +57,7 @@ export default function VeralliaStore() {
       subtitle: 'Soin Profond Intensif',
       price: 179,
       oldPrice: 229,
-      image: '🫙',
+      image: '/masque-capillaire.jpg',
       badge: 'NOUVEAU',
       rating: 4.8,
       reviews: 856,
@@ -72,7 +72,7 @@ export default function VeralliaStore() {
       subtitle: '3 Shampoings + 1 Masque GRATUIT',
       price: 449,
       oldPrice: 656,
-      image: '🎁',
+      image: '/pack-famille.jpg',
       badge: 'PROMO -31%',
       rating: 5.0,
       reviews: 1456,
@@ -88,7 +88,7 @@ export default function VeralliaStore() {
       subtitle: 'Huile Sèche Nourrissante',
       price: 129,
       oldPrice: 159,
-      image: '💧',
+      image: '/huile-capillaire.jpg',
       badge: 'TOP VENTE',
       rating: 4.7,
       reviews: 742,
@@ -103,7 +103,7 @@ export default function VeralliaStore() {
       subtitle: 'Tous les Produits Format Voyage',
       price: 199,
       oldPrice: 279,
-      image: '🎀',
+      image: '/coffret-decouverte.jpg',
       badge: 'COFFRET',
       rating: 4.8,
       reviews: 634,
@@ -348,8 +348,12 @@ export default function VeralliaStore() {
                   {cart.map(item => (
                     <div key={item.id} className="bg-stone-50 rounded-2xl p-4 border-2 border-stone-200 hover:border-emerald-700 transition-all">
                       <div className="flex gap-4">
-                        <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-stone-100 rounded-xl flex items-center justify-center text-4xl border border-emerald-200">
-                          {item.image}
+                        <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-stone-100 rounded-xl flex items-center justify-center border border-emerald-200 overflow-hidden">
+                          <img 
+                            src={item.image} 
+                            alt={item.name}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         <div className="flex-1">
                           <h4 className="font-bold text-emerald-900 mb-1">{item.name}</h4>
@@ -554,7 +558,11 @@ export default function VeralliaStore() {
                         {cart.map(item => (
                           <div key={item.id} className="flex justify-between items-center py-3 border-b border-stone-200 last:border-0">
                             <div className="flex items-center gap-3">
-                              <div className="text-2xl">{item.image}</div>
+                              <img 
+                                src={item.image} 
+                                alt={item.name}
+                                className="w-12 h-12 object-contain rounded-lg"
+                              />
                               <div>
                                 <p className="font-semibold text-emerald-900">{item.name}</p>
                                 <p className="text-sm text-gray-600">Qté: {item.quantity}</p>
@@ -805,7 +813,13 @@ export default function VeralliaStore() {
 
             <div className="relative">
               <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border-2 border-amber-400/30">
-                <div className="text-6xl text-center mb-4">🧴</div>
+                <div className="mb-4 flex justify-center">
+                  <img 
+                    src={products[0].image}
+                    alt={products[0].name}
+                    className="w-48 h-48 object-contain"
+                  />
+                </div>
                 <h3 className="text-2xl font-bold text-center mb-4 text-amber-400">Offre Spéciale</h3>
                 <div className="text-center mb-6">
                   <div className="text-5xl font-bold">149 DH</div>
@@ -895,7 +909,11 @@ export default function VeralliaStore() {
                 <div className="p-8">
                   {/* Product Image */}
                   <div className="bg-gradient-to-br from-emerald-50 to-stone-50 rounded-2xl p-8 mb-6 text-center group-hover:scale-105 transition-transform border border-emerald-100">
-                    <div className="text-7xl mb-4">{product.image}</div>
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-48 object-contain mb-4"
+                    />
                     <div className="inline-block bg-gradient-to-r from-emerald-800 to-green-900 text-white px-3 py-1 rounded-full text-xs font-bold">
                       {product.badge}
                     </div>
