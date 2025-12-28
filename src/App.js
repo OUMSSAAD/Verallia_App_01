@@ -25,10 +25,9 @@ export default function VeralliaStore() {
       id: 1,
       name: 'Verallia Shampoing Hydratant',
       subtitle: 'Formule Signature',
-      price: 149,
+      price: 89.99,
       oldPrice: 189,
       image: '/shampoing-hydratant.png',
-      imageStyle: 'contain',
       badge: 'BEST SELLER',
       rating: 4.9,
       reviews: 2847,
@@ -41,10 +40,9 @@ export default function VeralliaStore() {
       id: 2,
       name: 'Verallia Shampoing + Après-Shampoing',
       subtitle: 'Pack Duo Soin Complet',
-      price: 269,
+      price: 179.99,
       oldPrice: 349,
       image: '/pack-duo.png',
-      imageStyle: 'contain',
       badge: 'PACK DUO',
       rating: 4.9,
       reviews: 1923,
@@ -57,8 +55,8 @@ export default function VeralliaStore() {
       id: 3,
       name: 'Verallia Masque Capillaire',
       subtitle: 'Soin Profond Intensif',
-      price: 179,
-      oldPrice: 229,
+      price: 99.99,
+      oldPrice: 122,
       image: '/masque-capillaire.png',
       badge: 'NOUVEAU',
       rating: 4.8,
@@ -72,7 +70,7 @@ export default function VeralliaStore() {
       id: 4,
       name: 'Pack Famille Verallia',
       subtitle: '3 Shampoings + 1 Masque GRATUIT',
-      price: 449,
+      price: 369.89,
       oldPrice: 656,
       image: '/pack-famille.png',
       badge: 'PROMO -31%',
@@ -88,10 +86,9 @@ export default function VeralliaStore() {
       id: 5,
       name: 'Verallia Huile Capillaire',
       subtitle: 'Huile Sèche Nourrissante',
-      price: 129,
+      price: 119,
       oldPrice: 159,
       image: '/huile-capillaire.png',
-      imageStyle: 'contain',
       badge: 'TOP VENTE',
       rating: 4.7,
       reviews: 742,
@@ -915,7 +912,7 @@ export default function VeralliaStore() {
                     <img 
                       src={product.image} 
                       alt={product.name}
-                      className={`w-full h-64 p-2 ${product.imageStyle === 'contain' ? 'object-contain' : 'object-cover'}`}
+                      className="w-full h-64 object-cover"
                     />
                     <div className="inline-block bg-gradient-to-r from-emerald-800 to-green-900 text-white px-3 py-1 rounded-full text-xs font-bold -mt-4 relative">
                       {product.badge}
