@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Leaf, ShoppingCart, Heart, Star, Package, Truck, Shield, CreditCard, Check, X, Plus, Minus, Sparkles, TrendingUp, Users, Award, Clock, Zap, Gift, ChevronRight, ArrowRight, ShoppingBag, Tag } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 export default function VeralliaStore() {
   const [cart, setCart] = useState([]);
@@ -117,6 +118,9 @@ export default function VeralliaStore() {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     
+    // Initialiser EmailJS avec la Public Key
+    emailjs.init(process.env.REACT_APP_EMAILJS_PUBLIC_KEY);
+    
     // Popup promo après 3 secondes
     const timer = setTimeout(() => setShowPromoPopup(true), 3000);
     
@@ -174,58 +178,45 @@ export default function VeralliaStore() {
     setShowCheckout(true);
   };
 
-  // Envoyer email à l'entreprise
+  // Envoyer email à l'entreprise avec EmailJS
   const sendOrderEmailToCompany = async (orderDetails) => {
-    const emailContent = `
-NOUVELLE COMMANDE VERALLIA
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    try {
+      // Préparer la liste des produits
+      const productsList = orderDetails.items.map(item => 
+        `${item.name} x${item.quantity} - ${item.price * item.quantity} DH`
+      ).join('\n');
 
-📦 DÉTAILS CLIENT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Nom: ${orderDetails.customer.name}
-Téléphone: ${orderDetails.customer.phone}
-Email: ${orderDetails.customer.email}
-Ville: ${orderDetails.customer.city}
-Adresse: ${orderDetails.customer.address}
+      // Paramètres du template EmailJS
+      const templateParams = {
+        customer_name: orderDetails.customer.name,
+        customer_phone: orderDetails.customer.phone,
+        customer_email: orderDetails.customer.email,
+        customer_city: orderDetails.customer.city,
+        customer_address: orderDetails.customer.address,
+        products_list: productsList,
+        subtotal: orderDetails.subtotal,
+        discount: orderDetails.discount > 0 ? orderDetails.discount.toFixed(0) : '',
+        total: orderDetails.total.toFixed(0),
+        order_date: new Date().toLocaleString('fr-MA', {
+          dateStyle: 'full',
+          timeStyle: 'short'
+        })
+      };
 
-🛍️ PRODUITS COMMANDÉS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-${orderDetails.items.map(item => 
-  `${item.name} x${item.quantity} - ${item.price * item.quantity} DH`
-).join('\n')}
+      // Envoyer l'email via EmailJS
+      const response = await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        templateParams
+      );
 
-💰 MONTANTS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Sous-total: ${orderDetails.subtotal} DH
-${orderDetails.discount > 0 ? `Réduction (${orderDetails.promoCode}): -${orderDetails.discount} DH\n` : ''}Livraison: GRATUITE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TOTAL: ${orderDetails.total} DH
-
-💳 PAIEMENT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Mode: Paiement à la livraison (Cash)
-
-📅 DATE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-${new Date().toLocaleString('fr-MA', {
-  dateStyle: 'full',
-  timeStyle: 'short'
-})}
-
-⚡ ACTION REQUISE: Préparer et expédier sous 24h
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📧 Email destinataire: verallia065@gmail.com
-    `;
-
-    // Simulation d'envoi d'email (vous pouvez intégrer EmailJS ici)
-    console.log('📧 Email prêt pour verallia065@gmail.com:');
-    console.log(emailContent);
-    
-    // Dans un vrai système, vous utiliseriez EmailJS ou votre backend
-    // pour envoyer cet email à verallia065@gmail.com
-    
-    return true; // Succès simulé
+      console.log('✅ Email envoyé avec succès !', response.status, response.text);
+      return true;
+    } catch (error) {
+      console.error('❌ Erreur lors de l\'envoi de l\'email:', error);
+      // Ne pas bloquer la commande même si l'email échoue
+      return false;
+    }
   };
 
   const handleOrderSubmit = async (e) => {
