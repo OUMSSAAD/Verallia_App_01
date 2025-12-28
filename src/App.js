@@ -28,6 +28,7 @@ export default function VeralliaStore() {
       price: 149,
       oldPrice: 189,
       image: '/shampoing-hydratant.png',
+      imageStyle: 'contain',
       badge: 'BEST SELLER',
       rating: 4.9,
       reviews: 2847,
@@ -43,6 +44,7 @@ export default function VeralliaStore() {
       price: 269,
       oldPrice: 349,
       image: '/pack-duo.png',
+      imageStyle: 'contain',
       badge: 'PACK DUO',
       rating: 4.9,
       reviews: 1923,
@@ -89,6 +91,7 @@ export default function VeralliaStore() {
       price: 129,
       oldPrice: 159,
       image: '/huile-capillaire.png',
+      imageStyle: 'contain',
       badge: 'TOP VENTE',
       rating: 4.7,
       reviews: 742,
@@ -912,7 +915,7 @@ export default function VeralliaStore() {
                     <img 
                       src={product.image} 
                       alt={product.name}
-                      className="w-full h-64 object-cover"
+                      className={`w-full h-64 p-2 ${product.imageStyle === 'contain' ? 'object-contain' : 'object-cover'}`}
                     />
                     <div className="inline-block bg-gradient-to-r from-emerald-800 to-green-900 text-white px-3 py-1 rounded-full text-xs font-bold -mt-4 relative">
                       {product.badge}
